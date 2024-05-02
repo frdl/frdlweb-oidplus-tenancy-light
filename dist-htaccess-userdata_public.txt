@@ -1,0 +1,23 @@
+
+SetEnv HTTP_X_UDIRPUB_TENANT "tenant"
+
+
+
+RewriteEngine On
+#RewriteCond ./%{ENV:HTTP_X_VVHOSTS_USERDATA_PUBLIC_DIRNAME}/%{HTTP_HOST}/$1 -f [OR]
+#RewriteCond ./%{ENV:HTTP_X_VVHOSTS_USERDATA_PUBLIC_DIRNAME}/%{HTTP_HOST}/$1 -d [OR]
+#RewriteCond ./%{ENV:HTTP_X_VVHOSTS_USERDATA_PUBLIC_DIRNAME}/%{HTTP_HOST}/$1 -l
+#RewriteRule (.*)?userdata_pub/(.*)$ ./%{ENV:HTTP_X_VVHOSTS_USERDATA_PUBLIC_DIRNAME}/%{HTTP_HOST}/$2 [L,NC]
+
+#SetEnv HTTP_X_PHOSTS_PUBLIC "app/_hostoverwrite_public_folder"
+#RewriteCond %{HTTP_HOST} !^webfan\.de$
+#RewriteCond %{DOCUMENT_ROOT}/%{ENV:HTTP_X_PHOSTS_PUBLIC}/%{HTTP_HOST}%{REQUEST_URI} -f [OR]
+#RewriteCond %{DOCUMENT_ROOT}/%{ENV:HTTP_X_PHOSTS_PUBLIC}/%{HTTP_HOST}%{REQUEST_URI} -d [OR]
+#RewriteCond %{DOCUMENT_ROOT}/%{ENV:HTTP_X_PHOSTS_PUBLIC}/%{HTTP_HOST}%{REQUEST_URI} -l
+#RewriteRule !^%{ENV:HTTP_X_PHOSTS_PUBLIC}/%{HTTP_HOST} https://webfan.de/%{ENV:HTTP_X_PHOSTS_PUBLIC}/%{HTTP_HOST}%{REQUEST_URI} [QSA,P,L]
+
+
+RewriteCond %{DOCUMENT_ROOT}/(.*)?/userdata_pub/%{ENV:HTTP_X_UDIRPUB_TENANT}/%{HTTP_HOST}%{REQUEST_URI} -f [OR]
+RewriteCond %{DOCUMENT_ROOT}/(.*)?/userdata_pub/%{ENV:HTTP_X_UDIRPUB_TENANT}/%{HTTP_HOST}%{REQUEST_URI} -d [OR]
+RewriteCond %{DOCUMENT_ROOT}/(.*)?/userdata_pub/%{ENV:HTTP_X_UDIRPUB_TENANT}/%{HTTP_HOST}%{REQUEST_URI} -l
+RewriteRule !^(.*)?userdata_pub/%{ENV:HTTP_X_UDIRPUB_TENANT}/%{HTTP_HOST}(.*)$ /%{ENV:HTTP_X_UDIRPUB_TENANT}/%{HTTP_HOST}%/$2 [L,NC]
