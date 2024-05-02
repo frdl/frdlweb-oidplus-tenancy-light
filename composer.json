@@ -1,0 +1,34 @@
+{
+  "name": "frdl/frdlweb-oidplus-tenancy-light",
+  "description": "Little hack to enable OIDplus configuration for a lightweight tenant module (domain based).",
+  "type": "oiplus-plugin-admin-pages",
+  "keywords": ["oiplus", "tenancy"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Till Wehowski",
+      "email": "software@frdl.de",
+      "homepage": "https://frdl.de"
+    },
+	{
+	  "name" : "Daniel Marschall",
+	  "homepage" : "https://www.viathinksoft.com"		  
+	}
+  ],
+    "extra" : {
+        "installer-name" : "tenant"
+    },
+  "require": {
+    "php": ">=7.2|>=8.1",
+	"frdl/oidplus-io4-bridge-plugin" : "*"
+  },
+  "require-dev": {
+   
+  },
+  "autoload": {
+	    "classmap"  : ["."]
+  },
+  "autoload-dev": {
+
+  }
+}
