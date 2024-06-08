@@ -46,6 +46,10 @@ class OIDplusPagePublicTenancyLight extends OIDplusPagePluginAdmin //OIDplusPage
 
 			
 	  public function gui(string $id, array &$out, bool &$handled) { 
+		  
+
+
+		  
 		if (OIDplus::baseConfig()->getValue('TENANT_IS_TENANT', false) && explode('$',$id,2)[0] === 'oidplus:resources') {
 			
 			
@@ -61,7 +65,7 @@ class OIDplusPagePublicTenancyLight extends OIDplusPagePluginAdmin //OIDplusPage
 
 			$out['title'] = OIDplus::config()->getValue('system_title');
 			$out['icon'] = OIDplus::webpath(__DIR__,OIDplus::PATH_ABSOLUTE_CANONICAL).'img/main_icon.png';
-
+ 
 			if (file_exists(OIDplus::baseConfig()->getValue('USERDATA_WITHTENANT_DIRECTORY', OIDplus::localpath().'userdata/' ) . 'welcome/welcome$'.OIDplus::getCurrentLang().'.html')) {
 				$cont = file_get_contents(OIDplus::baseConfig()->getValue('USERDATA_WITHTENANT_DIRECTORY', OIDplus::localpath().'userdata/' ) . 'welcome/welcome$'.OIDplus::getCurrentLang().'.html');
 			} else if (file_exists(OIDplus::baseConfig()->getValue('USERDATA_WITHTENANT_DIRECTORY', OIDplus::localpath().'userdata/' ) . 'welcome/welcome.html')) {
@@ -126,6 +130,8 @@ class OIDplusPagePublicTenancyLight extends OIDplusPagePluginAdmin //OIDplusPage
 		    $file = __DIR__.\DIRECTORY_SEPARATOR.'config.tenent-light.php';
 		    $configfile = OIDplus::localpath().'userdata/baseconfig/config.inc.php';
 		    $configfileMod = OIDplus::localpath().'userdata/baseconfig/config.1.3.6.1.4.1.37476.9000.108.1778120633.php';
+		    $configfileModBase = basename($configfileMod);
+		   
 		
 	  $remove = 'die(<<<HTMLCODE
 $host is not a valid host!<br />
@@ -133,7 +139,7 @@ $host is not a valid host!<br />
 HTMLCODE
 			 );';
 $codext = <<<PHP
-	require '$configfileMod';		   
+	require __DIR__.\\DIRECTORY_SEPARATOR.'$configfileModBase';		   
 PHP;		
 		    if(!file_exists($configfileMod) 
 			   || filesize($configfileMod) !== filesize($file)
@@ -310,7 +316,7 @@ if(
 		   
 	
 	public function modifyContent($id, &$title, &$icon, &$text) {
-		 
+
 	}
 	
 	
