@@ -82,6 +82,7 @@ $tenantConfigFiles =[
 $tenantDir = OIDplus::localpath().'userdata/tenant/'.$host;
 $tenantConfigFiles =[
 	'/config.inc.php',
+	'/baseconfig/config.inc.php',
 	'/config.tenant.php',					
 	//'/config.'.$host.'.php'					
 ]; 
@@ -314,4 +315,10 @@ if ('GET' === $_SERVER['REQUEST_METHOD'] && isset($search['id']) && OIDplus::bas
 			  .OIDplus::baseConfig()->getValue('ROOT_INSTANCE_TABLENAME_PREFIX', 'oidplus_').$tablename);
 	     	}	 
         }
-		*/
+		
+
+ if(isset($_GET['test'])){
+ die(OIDplus::baseConfig()->getValue('OIDINFO_API_URL') . OIDplus::baseConfig()->getValue('TENANT_REQUESTED_HOST', $host ));	
+}*/
+$_SERVER['HTTP_HOST'] =  OIDplus::baseConfig()->getValue('TENANT_REQUESTED_HOST', $host );
+OIDplus::forceTenantSubDirName($host);
